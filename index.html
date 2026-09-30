@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>한국직업능력교육원 안산캠퍼스 - AI 보안 솔루션 랜딩페이지</title>
+    <title>한국직업능력교육원 안산캠퍼스 - AI기반 웹 접근제어 보안 솔루션 개발자 양성</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Pretendard Font -->
+    <!-- Pretendard Font CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
-    <!-- FontAwesome for Icons -->
+    <!-- FontAwesome 6 for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- AOS Animation CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -23,12 +23,17 @@
                         sans: ['Pretendard', 'sans-serif'],
                     },
                     animation: {
-                        marquee: 'marquee 40s linear infinite',
+                        marquee: 'marquee 35s linear infinite',
+                        float: 'float 3s ease-in-out infinite',
                     },
                     keyframes: {
                         marquee: {
                             '0%': { transform: 'translateX(0)' },
                             '100%': { transform: 'translateX(-50%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
                         }
                     }
                 }
@@ -36,10 +41,10 @@
         }
     </script>
     <style>
-        body { font-family: 'Pretendard', sans-serif; overflow-x: hidden; }
-        .swiper-button-next, .swiper-button-prev { color: white; text-shadow: 0 0 10px rgba(0,0,0,0.5); }
-        .swiper-pagination-bullet { background: white; opacity: 0.7; }
-        .swiper-pagination-bullet-active { background: #3b82f6; opacity: 1; transform: scale(1.2); }
+        body { font-family: 'Pretendard', sans-serif; overflow-x: hidden; scroll-behavior: smooth; }
+        .swiper-button-next, .swiper-button-prev { color: #22d3ee; text-shadow: 0 0 10px rgba(0,0,0,0.8); }
+        .swiper-pagination-bullet { background: white; opacity: 0.5; }
+        .swiper-pagination-bullet-active { background: #06b6d4; opacity: 1; transform: scale(1.2); }
         
         .animate-marquee:hover {
             animation-play-state: paused;
@@ -62,133 +67,208 @@
         }
         .accordion-icon.open { 
             transform: rotate(180deg); 
+            color: #22d3ee;
         }
     </style>
 </head>
-<body class="bg-slate-800 text-white antialiased selection:bg-blue-200 relative pt-16">
+<body class="bg-slate-950 text-slate-100 antialiased selection:bg-cyan-500/30 selection:text-cyan-200 relative pt-16">
 
-    <!-- Header / Contact -->
-    <div class="fixed top-0 left-0 w-full bg-slate-900/90 backdrop-blur-md z-50 border-b border-white/10">
-        <div class="max-w-5xl mx-auto px-4 py-3 flex justify-end">
-            <a href="tel:1661-8126" class="flex items-center gap-2 text-white hover:text-cyan-300 transition-colors font-bold text-sm md:text-base">
-                <span class="bg-blue-600 px-3 py-1 rounded-full shadow-sm">☎️ 상담전화 : 1661-8126</span>
+    <!-- 1. HEADER (방패 로고 삭제, 타이포그래피 + 오른쪽 위 상담신청 버튼) -->
+    <header class="fixed top-0 left-0 w-full bg-slate-900/90 backdrop-blur-md z-50 border-b border-slate-800 shadow-md">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <a href="#" class="flex flex-col group">
+                <div class="flex items-center gap-1.5">
+                    <span class="text-[11px] font-bold text-cyan-400 tracking-wider">안산캠퍼스</span>
+                    <span class="w-1 h-1 rounded-full bg-cyan-400"></span>
+                    <span class="text-[10px] text-slate-400 font-medium">국비지원과정</span>
+                </div>
+                <span class="text-base md:text-lg font-black text-white tracking-tight group-hover:text-cyan-300 transition-colors">
+                    한국직업능력교육원
+                </span>
             </a>
-        </div>
-    </div>
 
-    <!-- Hero Section -->
-    <section class="bg-slate-900 text-white pt-24 pb-32 px-4 relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-400 via-transparent to-transparent"></div>
-        <div class="max-w-5xl mx-auto relative z-10 text-center" data-aos="fade-up" data-aos-duration="1000">
-            <span class="inline-block py-1 px-3 rounded-full bg-blue-900/200/20 text-blue-300 text-sm font-semibold mb-6 border border-blue-500/30">
-                한국직업능력교육원 안산캠퍼스
-            </span>
-            <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight tracking-tight">
-                AI기반 웹 접근제어<br />
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
-                    보안 솔루션 개발자 양성
+            <!-- 오른쪽 상단: 전화번호 + [상담신청] 새 창 연결 -->
+            <div class="flex items-center gap-3">
+                <a href="tel:1661-8126" class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors text-xs font-semibold border border-slate-700">
+                    <i class="fa-solid fa-phone text-cyan-400"></i>
+                    <span>1661-8126</span>
+                </a>
+                
+                <a href="https://naver.me/GyYmEEvT" target="_blank" rel="noopener noreferrer" 
+                   class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-600 via-cyan-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-bold text-xs md:text-sm shadow-lg shadow-cyan-500/25 hover:shadow-cyan-400/40 hover:-translate-y-0.5 transition-all">
+                    <span>상담신청</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-xs opacity-90"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. HERO SECTION -->
+    <section class="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 text-white pt-24 pb-28 px-4 relative overflow-hidden border-b border-slate-800/80">
+        <div class="absolute inset-0 opacity-15 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-cyan-400 via-blue-600 to-transparent pointer-events-none"></div>
+        <div class="max-w-5xl mx-auto relative z-10 text-center" data-aos="fade-up" data-aos-duration="900">
+            <h1 class="text-3xl md:text-6xl font-black mb-6 leading-tight tracking-tight">
+                개인정보 유출과 해킹 위협,<br />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-teal-200">
+                    AI가 자율 대응하는 보안 솔루션 개발자
                 </span>
             </h1>
+            <p class="text-sm md:text-lg text-slate-300 max-w-3xl mx-auto font-normal leading-relaxed mb-8">
+                비전공자도 실무에 바로 투입 가능한 차세대 AI 정보보안 엔지니어 양성과정!<br class="hidden md:inline"/>
+                <span class="md:whitespace-nowrap">기초 프로그래밍부터 클라우드 인프라, 침해사고 대응, AI 엔진 구축까지 원스톱으로 완성합니다.</span>
+            </p>
+            <div class="flex flex-wrap justify-center gap-2 text-xs md:text-sm text-slate-300 font-medium">
+                <span class="bg-slate-900 border border-slate-800 px-3.5 py-1.5 rounded-lg shadow-sm flex items-center gap-1.5"><span class="text-cyan-400">💰</span> 평균연봉 4,300만원</span>
+                <span class="bg-slate-900 border border-slate-800 px-3.5 py-1.5 rounded-lg shadow-sm flex items-center gap-1.5"><span class="text-cyan-400">🏠</span> 기숙사 운영지원</span>
+                <span class="bg-slate-900 border border-slate-800 px-3.5 py-1.5 rounded-lg shadow-sm flex items-center gap-1.5"><span class="text-cyan-400">🎁</span> 훈련장려금 최대 80만원</span>
+            </div>
         </div>
     </section>
 
-    <!-- Info Grid Section -->
-    <section class="max-w-5xl mx-auto px-4 -mt-20 relative z-20 mb-20">
+    <!-- 3. INFO GRID & HORIZONTAL ACTION BUTTON -->
+    <section class="max-w-5xl mx-auto px-4 -mt-16 relative z-20 mb-20">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div class="p-6 rounded-2xl flex items-start gap-4 shadow-sm border bg-slate-900 border-slate-800" data-aos="fade-up" data-aos-delay="100">
-                <div class="p-3 rounded-xl shrink-0 bg-slate-800 text-slate-300">
-                    <i class="fa-regular fa-calendar text-xl"></i>
+            
+            <div class="p-6 rounded-2xl flex items-start gap-4 shadow-lg border bg-slate-900 border-cyan-500/30" data-aos="fade-up" data-aos-delay="100">
+                <div class="p-3.5 rounded-xl shrink-0 bg-cyan-950/80 text-cyan-400 border border-cyan-800/50">
+                    <i class="fa-regular fa-calendar-check text-xl"></i>
                 </div>
                 <div>
-                    <p class="text-sm font-bold text-slate-500 mb-1">교육기간</p>
-                    <p class="font-bold text-white">2026-11-27 ~ 2027-06-14</p>
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="text-xs font-bold text-cyan-400 uppercase">교육기간</span>
+                        <span class="text-[10px] bg-red-950 text-red-400 border border-red-800 px-1.5 py-0.2 rounded font-bold">마감임박</span>
+                    </div>
+                    <p class="font-bold text-white text-base md:text-lg whitespace-nowrap">2026-11-30 ~ 2027-06-15</p>
                 </div>
             </div>
 
-            <div class="p-6 rounded-2xl flex items-start gap-4 shadow-sm border bg-slate-900 border-slate-800" data-aos="fade-up" data-aos-delay="200">
-                <div class="p-3 rounded-xl shrink-0 bg-slate-800 text-slate-300">
+            <div class="p-6 rounded-2xl flex items-start gap-4 shadow-lg border bg-slate-900 border-slate-800" data-aos="fade-up" data-aos-delay="200">
+                <div class="p-3.5 rounded-xl shrink-0 bg-slate-800 text-cyan-400">
                     <i class="fa-regular fa-clock text-xl"></i>
                 </div>
                 <div>
-                    <p class="text-sm font-bold text-slate-500 mb-1">교육시간</p>
-                    <p class="font-bold text-white">09:00~17:40 (월-금)</p>
+                    <p class="text-xs font-bold text-slate-400 mb-1">교육시간</p>
+                    <p class="font-bold text-white text-base md:text-lg">09:00 ~ 17:40 (월-금)</p>
+                    <p class="text-xs text-slate-400 mt-0.5">일 8시간 / 총 960시간 실무 훈련</p>
                 </div>
             </div>
 
-            <div class="p-6 rounded-2xl flex items-start gap-4 shadow-sm border bg-slate-900 border-slate-800" data-aos="fade-up" data-aos-delay="300">
-                <div class="p-3 rounded-xl shrink-0 bg-slate-800 text-slate-300">
+            <div class="p-6 rounded-2xl flex items-start gap-4 shadow-lg border bg-slate-900 border-slate-800" data-aos="fade-up" data-aos-delay="300">
+                <div class="p-3.5 rounded-xl shrink-0 bg-slate-800 text-cyan-400">
                     <i class="fa-solid fa-users text-xl"></i>
                 </div>
                 <div>
-                    <p class="text-sm font-bold text-slate-500 mb-1">모집인원</p>
-                    <p class="font-bold text-white">25명</p>
+                    <p class="text-xs font-bold text-slate-400 mb-1">모집인원</p>
+                    <p class="font-bold text-white text-base md:text-lg">25명 (선착순 면접 마감)</p>
+                    <p class="text-xs text-slate-400 mt-0.5">소수정예 1:1 밀착 코칭</p>
                 </div>
             </div>
 
-            <div class="p-6 rounded-2xl flex items-start gap-4 shadow-sm border bg-slate-900 border-slate-800" data-aos="fade-up" data-aos-delay="100">
-                <div class="p-3 rounded-xl shrink-0 bg-slate-800 text-slate-300">
+            <div class="p-6 rounded-2xl flex items-start gap-4 shadow-lg border bg-slate-900 border-slate-800" data-aos="fade-up" data-aos-delay="100">
+                <div class="p-3.5 rounded-xl shrink-0 bg-slate-800 text-cyan-400">
                     <i class="fa-regular fa-credit-card text-xl"></i>
                 </div>
                 <div>
-                    <p class="text-sm font-bold text-slate-500 mb-1">교육비</p>
-                    <p class="font-bold text-white"><span class="line-through text-red-500 mr-2">10,140,390원</span><span class="text-blue-400 font-black">(국비지원)</span></p>
+                    <p class="text-xs font-bold text-slate-400 mb-1">정규 교육비</p>
+                    <p class="font-bold text-white text-base md:text-lg">
+                        <span class="line-through text-slate-500 mr-2 text-sm">10,140,390원</span>
+                        <span class="text-cyan-400 font-bold">(국비지원)</span>
+                    </p>
+                    <p class="text-xs text-slate-400 mt-0.5">교재비, 실습장비 일체 지원</p>
                 </div>
             </div>
 
-            <div class="p-6 rounded-2xl flex items-start gap-4 shadow-sm border bg-slate-900 border-slate-800" data-aos="fade-up" data-aos-delay="200">
-                <div class="p-3 rounded-xl shrink-0 bg-slate-800 text-slate-300">
+            <div class="p-6 rounded-2xl flex items-start gap-4 shadow-lg border bg-slate-900 border-slate-800" data-aos="fade-up" data-aos-delay="200">
+                <div class="p-3.5 rounded-xl shrink-0 bg-slate-800 text-cyan-400">
                     <i class="fa-solid fa-wallet text-xl"></i>
                 </div>
                 <div>
-                    <p class="text-sm font-bold text-slate-500 mb-1">자비부담금</p>
-                    <p class="font-bold text-white">0~40만원</p>
+                    <p class="text-xs font-bold text-slate-400 mb-1">실제 자비부담금</p>
+                    <p class="font-bold text-white text-base md:text-lg">0 ~ 40만원</p>
+                    <p class="text-xs text-slate-400 mt-0.5 whitespace-nowrap">국민취업지원제도 유형별 상이</p>
                 </div>
             </div>
 
-            <div class="p-6 rounded-2xl flex items-start gap-4 shadow-sm border bg-blue-900/20 border-blue-800" data-aos="fade-up" data-aos-delay="300">
-                <div class="p-3 rounded-xl shrink-0 bg-blue-900/200 text-white">
-                    <i class="fa-solid fa-shield-halved text-xl"></i>
+            <div class="p-6 rounded-2xl flex items-start gap-4 shadow-lg border bg-gradient-to-br from-slate-900 to-blue-950/40 border-blue-500/40" data-aos="fade-up" data-aos-delay="300">
+                <div class="p-3.5 rounded-xl shrink-0 bg-blue-900/40 text-cyan-300">
+                    <i class="fa-solid fa-sack-dollar text-xl"></i>
                 </div>
                 <div>
-                    <p class="text-sm font-bold text-slate-500 mb-1">훈련장려금</p>
-                    <p class="font-bold text-blue-400 text-sm whitespace-nowrap">국취제 연계시 최대 80만원 지원</p>
+                    <p class="text-xs font-bold text-cyan-400 mb-1">훈련장려금 혜택</p>
+                    <p class="font-bold text-cyan-200 text-base md:text-lg">매월 최대 80만원 지원</p>
+                    <p class="text-xs text-slate-400 mt-0.5">국민취업지원제도 연계 시</p>
                 </div>
             </div>
         </div>
+
+        <!-- 가로 형태 과정지원하기 버튼 -->
+        <div class="mt-6" data-aos="fade-up" data-aos-delay="350">
+            <a href="https://naver.me/GyYmEEvT" target="_blank" rel="noopener noreferrer" 
+               class="block w-full p-1 rounded-2xl bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-400 shadow-xl shadow-cyan-500/20 hover:shadow-cyan-400/40 transition-all hover:scale-[1.01] active:scale-[0.99] group">
+                <div class="bg-slate-950 rounded-[14px] px-6 py-5 md:py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-4 text-center md:text-left">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-400 text-white flex items-center justify-center shrink-0 shadow-md">
+                            <i class="fa-solid fa-laptop-code text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-center md:justify-start gap-2 mb-1">
+                                <span class="bg-cyan-500 text-slate-950 font-black text-xs px-2 py-0.5 rounded">선착순 25명 마감</span>
+                                <span class="text-xs text-cyan-300 font-semibold">1분 간편 지원접수</span>
+                            </div>
+                            <h3 class="text-lg md:text-2xl font-black text-white tracking-tight">
+                                AI 보안 솔루션 개발자 과정지원하기
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="shrink-0 flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-black text-sm md:text-base shadow-lg shadow-cyan-500/30 group-hover:from-blue-500 group-hover:to-cyan-400 transition">
+                        <span>지원신청하기</span>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
     </section>
 
-    <!-- Vision Section -->
-    <section class="py-20 bg-slate-900">
+    <!-- 4. VISION SECTION -->
+    <section class="py-20 bg-slate-900 border-t border-b border-slate-800">
         <div class="max-w-4xl mx-auto px-4 text-center">
+            <span class="inline-block px-3 py-1 rounded-full bg-blue-950 border border-blue-800 text-cyan-400 text-xs font-semibold mb-3">
+                Security Market Trends
+            </span>
             <h2 class="text-3xl md:text-4xl font-bold mb-4 leading-tight" data-aos="fade-up">
                 개인정보 유출, 해킹<br />
-                <span class="text-blue-400">AI가 대응하는 시대!</span>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">
+                    AI가 자율 대응하는 시대!
+                </span>
             </h2>
-            <p class="text-lg text-slate-500 mb-12" data-aos="fade-up" data-aos-delay="100">협약기업(보안) 수요조사 결과, 보안 회사들이 가장 원하는 인재상</p>
+            <p class="text-base md:text-lg text-slate-400 mb-12" data-aos="fade-up" data-aos-delay="100">
+                협약기업(보안/SW) 수요조사 결과, 기업들이 가장 절실하게 원하는 핵심 인재상입니다.
+            </p>
 
-            <div class="bg-slate-800 border border-slate-800 rounded-3xl p-8 md:p-12 shadow-sm max-w-2xl mx-auto text-left" data-aos="zoom-in" data-aos-delay="200">
-                <h3 class="text-xl font-bold mb-8 text-center flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-crosshairs text-blue-400"></i>
-                    AI 보안 개발자의 비전
+            <div class="bg-slate-950 border border-slate-800 rounded-3xl p-8 md:p-12 shadow-xl max-w-2xl mx-auto text-left relative overflow-hidden" data-aos="zoom-in" data-aos-delay="200">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-bl-full pointer-events-none"></div>
+                <h3 class="text-xl font-bold mb-8 text-center flex items-center justify-center gap-2 text-white">
+                    <i class="fa-solid fa-crosshairs text-cyan-400"></i>
+                    기업 현장의 인재 채용 선호도
                 </h3>
                 
                 <div class="space-y-6 count-up-container">
                     <div>
                         <div class="flex justify-between mb-2">
-                            <span class="font-medium text-slate-500">기존 개발자 수요</span>
-                            <span class="font-bold text-slate-500 count-up" data-target="12">0%</span>
+                            <span class="font-medium text-slate-400 text-sm">기존 일반 개발자 수요</span>
+                            <span class="font-bold text-slate-400 count-up" data-target="12">0%</span>
                         </div>
-                        <div class="w-full bg-slate-200 rounded-full h-5 overflow-hidden">
-                            <div class="bg-slate-400 h-full rounded-full transition-all duration-1000 ease-out w-0 progress-bar" data-width="12%"></div>
+                        <div class="w-full bg-slate-800 rounded-full h-4 overflow-hidden">
+                            <div class="bg-slate-500 h-full rounded-full transition-all duration-1000 ease-out w-0 progress-bar" data-width="12%"></div>
                         </div>
                     </div>
                     <div>
                         <div class="flex justify-between mb-2">
-                            <span class="font-bold text-blue-400 text-lg">AI 보안 개발자 수요</span>
-                            <span class="font-bold text-blue-400 text-lg count-up" data-target="88">0%</span>
+                            <span class="font-bold text-cyan-400 text-base md:text-lg">AI 보안 솔루션 개발자 수요</span>
+                            <span class="font-bold text-cyan-400 text-xl count-up" data-target="88">0%</span>
                         </div>
-                        <div class="w-full bg-slate-200 rounded-full h-5 overflow-hidden">
-                            <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full transition-all duration-1000 ease-out w-0 progress-bar" style="transition-delay: 300ms;" data-width="88%"></div>
+                        <div class="w-full bg-slate-800 rounded-full h-5 overflow-hidden border border-cyan-500/30">
+                            <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full rounded-full transition-all duration-1000 ease-out w-0 progress-bar shadow-lg shadow-cyan-500/40" style="transition-delay: 200ms;" data-width="88%"></div>
                         </div>
                     </div>
                 </div>
@@ -196,10 +276,16 @@
         </div>
     </section>
 
-    <!-- Video Carousel Section -->
-    <section class="py-16 bg-slate-800">
+    <!-- 5. VIDEO CAROUSEL SECTION -->
+    <section class="py-16 bg-slate-950">
         <div class="max-w-4xl mx-auto px-4" data-aos="fade-up">
-            <div class="swiper mySwiper rounded-3xl shadow-2xl overflow-hidden aspect-video border-4 border-white bg-slate-200">
+            <div class="text-center mb-8">
+                <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest bg-cyan-950 px-3 py-1 rounded-full border border-cyan-800">
+                    Video Highlights
+                </span>
+                <h2 class="text-2xl md:text-3xl font-black text-white mt-2">영상으로 보는 실무 교육</h2>
+            </div>
+            <div class="swiper mySwiper rounded-3xl shadow-2xl overflow-hidden aspect-video border-2 border-slate-700 bg-slate-900">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
                         <iframe class="w-full h-full" src="https://www.youtube.com/embed/w-zcw2WopZQ?mute=1&loop=1&playlist=w-zcw2WopZQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -218,639 +304,475 @@
         </div>
     </section>
 
-    <!-- Core Points Section -->
-    <section class="pb-24 bg-slate-800 pt-8">
+    <!-- 6. CORE 5 POINTS SECTION -->
+    <section class="py-20 bg-slate-900 border-t border-slate-800">
         <div class="max-w-5xl mx-auto px-4">
             <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-blue-400 font-bold tracking-wider text-sm uppercase">Core Features</span>
-                <h2 class="text-3xl md:text-4xl font-bold mt-2">핵심 POINT</h2>
+                <span class="text-cyan-400 font-bold tracking-wider text-xs uppercase bg-cyan-950 px-3 py-1 rounded-full border border-cyan-800">Core Features</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2">한직교 안산캠퍼스 핵심 POINT</h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-slate-900 p-8 rounded-3xl shadow-sm border border-slate-800 flex flex-col gap-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="flex-shrink-0">
-                        <div class="w-16 h-16 rounded-2xl bg-blue-900/20 flex items-center justify-center mb-4">
-                            <i class="fa-solid fa-bolt text-2xl text-blue-500"></i>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-slate-950 p-8 rounded-3xl shadow-sm border border-slate-800 flex flex-col gap-4 hover:border-cyan-500/50 transition" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center justify-between">
+                        <div class="w-14 h-14 rounded-2xl bg-cyan-950 text-cyan-400 flex items-center justify-center border border-cyan-800">
+                            <i class="fa-solid fa-bolt text-2xl"></i>
                         </div>
-                        <span class="text-4xl font-black text-slate-100">01</span>
+                        <span class="text-4xl font-black text-slate-800">01</span>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold text-white mb-3">AI가 왜 중요한가요?</h3>
-                        <p class="text-slate-300 leading-relaxed">외부 사이버 공격부터 해킹까지 AI가 스스로 대응하고 반격하기에 기업이 원하는 필수 실무 능력입니다.</p>
+                        <h3 class="text-xl font-bold text-white mb-2">AI가 왜 중요한가요?</h3>
+                        <p class="text-slate-400 leading-relaxed text-sm">외부 사이버 공격부터 해킹까지 AI가 스스로 이상 징후를 감지하고 반격하기에 기업이 원하는 필수 실무 능력입니다.</p>
                     </div>
                 </div>
 
-                <div class="bg-slate-900 p-8 rounded-3xl shadow-sm border border-slate-800 flex flex-col gap-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="flex-shrink-0">
-                        <div class="w-16 h-16 rounded-2xl bg-blue-900/20 flex items-center justify-center mb-4">
-                            <i class="fa-solid fa-users-viewfinder text-2xl text-blue-500"></i>
+                <div class="bg-slate-950 p-8 rounded-3xl shadow-sm border border-slate-800 flex flex-col gap-4 hover:border-cyan-500/50 transition" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center justify-between">
+                        <div class="w-14 h-14 rounded-2xl bg-cyan-950 text-cyan-400 flex items-center justify-center border border-cyan-800">
+                            <i class="fa-solid fa-users-viewfinder text-2xl"></i>
                         </div>
-                        <span class="text-4xl font-black text-slate-100">02</span>
+                        <span class="text-4xl font-black text-slate-800">02</span>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold text-white mb-3">비전공자도 가능한 직종</h3>
-                        <p class="text-slate-300 leading-relaxed">기존 개발자 시장들의 경우 전공자, 경력자만 채용했지만 AI는 전공자가 턱없이 부족하여 비전공자도 충분히 가능합니다.</p>
+                        <h3 class="text-xl font-bold text-white mb-2">비전공자도 가능한 직종</h3>
+                        <p class="text-slate-400 leading-relaxed text-sm">기존 개발자 시장들의 경우 전공자, 경력자만 채용했지만 AI 보안은 전공자가 턱없이 부족하여 비전공자도 충분히 취업이 가능합니다.</p>
                     </div>
                 </div>
 
-                <div class="bg-slate-900 p-8 rounded-3xl shadow-sm border border-slate-800 flex flex-col gap-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="flex-shrink-0">
-                        <div class="w-16 h-16 rounded-2xl bg-blue-900/20 flex items-center justify-center mb-4">
-                            <i class="fa-solid fa-briefcase text-2xl text-blue-500"></i>
+                <div class="bg-slate-950 p-8 rounded-3xl shadow-sm border border-slate-800 flex flex-col gap-4 hover:border-cyan-500/50 transition" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center justify-between">
+                        <div class="w-14 h-14 rounded-2xl bg-cyan-950 text-cyan-400 flex items-center justify-center border border-cyan-800">
+                            <i class="fa-solid fa-briefcase text-2xl"></i>
                         </div>
-                        <span class="text-4xl font-black text-slate-100">03</span>
+                        <span class="text-4xl font-black text-slate-800">03</span>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold text-white mb-3">다양한 취업 분야</h3>
-                        <p class="text-slate-300 leading-relaxed">정보보안에 한정되지 않고 AI와 관련된 모든 분야부터 앱/웹, 네트워크, 서버 등 다양한 분야로 취업이 가능합니다.</p>
+                        <h3 class="text-xl font-bold text-white mb-2">다양한 취업 분야</h3>
+                        <p class="text-slate-400 leading-relaxed text-sm">정보보안에 한정되지 않고 AI와 관련된 모든 분야부터 앱/웹 백엔드, 네트워크, 서버 인프라 등 폭넓은 분야로 진출합니다.</p>
                     </div>
                 </div>
 
-                <div class="bg-slate-900 p-8 rounded-3xl shadow-sm border border-slate-800 flex flex-col gap-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="flex-shrink-0">
-                        <div class="w-16 h-16 rounded-2xl bg-blue-900/20 flex items-center justify-center mb-4">
-                            <i class="fa-solid fa-shield-cat text-2xl text-blue-500"></i>
+                <div class="bg-slate-950 p-8 rounded-3xl shadow-sm border border-slate-800 flex flex-col gap-4 hover:border-cyan-500/50 transition" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center justify-between">
+                        <div class="w-14 h-14 rounded-2xl bg-cyan-950 text-cyan-400 flex items-center justify-center border border-cyan-800">
+                            <i class="fa-solid fa-shield-cat text-2xl"></i>
                         </div>
-                        <span class="text-4xl font-black text-slate-100">04</span>
+                        <span class="text-4xl font-black text-slate-800">04</span>
                     </div>
                     <div>
-                        <h3 class="text-xl font-bold text-white mb-3">초보자도 가능한 난이도</h3>
-                        <p class="text-slate-300 leading-relaxed">AI, 정보보안은 높은 난이도로 알려져 있는 직종이지만 한직교에서는 기초부터 실무까지 누구나 따라갈 수 있도록 체계적인 커리큘럼으로 운영합니다.</p>
+                        <h3 class="text-xl font-bold text-white mb-2">초보자도 가능한 난이도</h3>
+                        <p class="text-slate-400 leading-relaxed text-sm">AI, 정보보안은 높은 난이도로 알려져 있지만, 한직교에서는 기초부터 실무 프로젝트까지 누구나 따라갈 수 있도록 단계별로 교육합니다.</p>
                     </div>
                 </div>
 
-                <div class="md:col-span-2" data-aos="fade-up" data-aos-delay="300">
-                    <div class="bg-slate-900 p-8 rounded-3xl shadow-sm border border-slate-800 flex flex-col md:flex-row items-center text-center md:text-left gap-6">
-                        <div class="flex-shrink-0">
-                            <div class="w-16 h-16 rounded-2xl bg-blue-900/20 flex items-center justify-center mb-4 mx-auto md:mx-0">
-                                <i class="fa-solid fa-award text-2xl text-blue-500"></i>
-                            </div>
-                            <span class="text-4xl font-black text-slate-100">05</span>
+                <div class="md:col-span-2 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 p-8 rounded-3xl shadow-sm border border-cyan-500/30 flex flex-col md:flex-row items-center text-center md:text-left gap-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-400 text-white flex items-center justify-center shrink-0 shadow-lg">
+                        <i class="fa-solid fa-award text-3xl"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center justify-center md:justify-start gap-2 mb-1">
+                            <span class="text-xs font-bold text-cyan-400 bg-cyan-950 px-2 py-0.5 rounded border border-cyan-800">POINT 05</span>
                         </div>
-                        <div>
-                            <h3 class="text-xl font-bold text-white mb-3">세계 10대 IT 기업 출신 강사</h3>
-                            <p class="text-slate-300 leading-relaxed">누구나 들으면 알 수 있는 세계 10대 IT 기업 출신 강사부터 30년 이상 프로그래밍 경력을 갖춘 전문 강사님들이 직접 수업합니다.</p>
-                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">세계 10대 IT 기업 출신 & 30년 경력 베테랑 강사진</h3>
+                        <p class="text-slate-300 leading-relaxed text-sm">누구나 들으면 알 수 있는 세계 10대 글로벌 IT 기업 출신 강사부터 30년 이상 프로그래밍 및 보안 현업 경력을 갖춘 전문 강사님들이 직접 수업합니다.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Target Audience Section -->
-    <section class="py-20 bg-slate-800 text-white border-y border-slate-700">
-        <div class="max-w-4xl mx-auto px-4">
-            <div class="text-center mb-12" data-aos="fade-down">
-                <h2 class="text-3xl font-bold mb-4">수강 대상</h2>
-                <p class="text-slate-300 text-lg">이런 분들께 적극 추천드립니다</p>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-                <div class="bg-slate-700/50 backdrop-blur border border-slate-600 p-4 rounded-xl flex items-center gap-3" data-aos="zoom-in" data-aos-delay="100">
-                    <i class="fa-solid fa-circle-check text-cyan-300 text-xl"></i>
-                    <span class="font-medium text-lg">AI를 개발하고 싶은 분들</span>
+    <!-- 7. TARGET AUDIENCE SECTION (4개 동일 규격 & 넉넉한 너비로 텍스트 넘침 방지) -->
+    <section class="py-20 bg-slate-950 border-t border-slate-800">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest bg-cyan-950 px-3 py-1 rounded-full border border-cyan-800 mb-3 inline-block">
+                Target Audience
+            </span>
+            <h2 class="text-3xl font-black mb-3">수강 추천 대상</h2>
+            <p class="text-slate-400 text-sm mb-12">이런 분들께 가장 빠른 취업 지름길이 되어 드립니다</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto items-stretch text-left">
+                <div class="bg-slate-900 border border-slate-800 px-6 py-5 rounded-2xl flex items-center gap-3.5 hover:border-cyan-500/40 transition shadow-sm h-full min-h-[76px] md:min-h-[82px]" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fa-solid fa-circle-check text-cyan-400 text-lg shrink-0"></i>
+                    <span class="font-semibold text-sm md:text-base text-slate-200 leading-snug break-keep">비전공자이지만 IT/보안 분야로 취업하고 싶은 분</span>
                 </div>
-                <div class="bg-slate-700/50 backdrop-blur border border-slate-600 p-4 rounded-xl flex items-center gap-3" data-aos="zoom-in" data-aos-delay="200">
-                    <i class="fa-solid fa-circle-check text-cyan-300 text-xl"></i>
-                    <span class="font-medium text-lg">높은 연봉을 받고 싶은 분들</span>
+                <div class="bg-slate-900 border border-slate-800 px-6 py-5 rounded-2xl flex items-center gap-3.5 hover:border-cyan-500/40 transition shadow-sm h-full min-h-[76px] md:min-h-[82px]" data-aos="fade-up" data-aos-delay="150">
+                    <i class="fa-solid fa-circle-check text-cyan-400 text-lg shrink-0"></i>
+                    <span class="font-semibold text-sm md:text-base text-slate-200 leading-snug break-keep">AI 알고리즘과 웹 보안 기술을 함께 배우고 싶은 분</span>
                 </div>
-                <div class="bg-slate-700/50 backdrop-blur border border-slate-600 p-4 rounded-xl flex items-center gap-3" data-aos="zoom-in" data-aos-delay="300">
-                    <i class="fa-solid fa-circle-check text-cyan-300 text-xl"></i>
-                    <span class="font-medium text-lg">새롭게 이직을 꿈꾸시는 분들</span>
+                <div class="bg-slate-900 border border-slate-800 px-6 py-5 rounded-2xl flex items-center gap-3.5 hover:border-cyan-500/40 transition shadow-sm h-full min-h-[76px] md:min-h-[82px]" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fa-solid fa-circle-check text-cyan-400 text-lg shrink-0"></i>
+                    <span class="font-semibold text-sm md:text-base text-slate-200 leading-snug break-keep">실전 포트폴리오를 만들어 높은 연봉으로 이직을 꿈꾸는 분</span>
                 </div>
-                <div class="bg-slate-700/50 backdrop-blur border border-slate-600 p-4 rounded-xl flex items-center gap-3" data-aos="zoom-in" data-aos-delay="400">
-                    <i class="fa-solid fa-circle-check text-cyan-300 text-xl"></i>
-                    <span class="font-medium text-lg">정보보안의 꿈이 있었던 분들</span>
+                <div class="bg-slate-900 border border-slate-800 px-6 py-5 rounded-2xl flex items-center gap-3.5 hover:border-cyan-500/40 transition shadow-sm h-full min-h-[76px] md:min-h-[82px]" data-aos="fade-up" data-aos-delay="250">
+                    <i class="fa-solid fa-circle-check text-cyan-400 text-lg shrink-0"></i>
+                    <span class="font-semibold text-sm md:text-base text-slate-200 leading-snug break-keep">국비지원을 활용해 전문 기술을 탄탄히 다지고 싶은 분</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Employment Marquee Section -->
-    <section class="py-16 bg-slate-900 overflow-hidden border-b border-slate-800">
+    <!-- 8. EMPLOYMENT TICKER & STATS SECTION -->
+    <section class="py-20 bg-slate-950 overflow-hidden">
         <div class="max-w-5xl mx-auto px-4 text-center mb-10" data-aos="fade-up">
-            <h2 class="text-2xl md:text-3xl font-bold text-white">
-                수료 후, <span class="text-blue-400">이런 곳으로 취업합니다</span>
+            <span class="text-xs font-bold text-cyan-400 uppercase tracking-widest bg-cyan-950 px-3 py-1 rounded-full border border-cyan-800">Placement</span>
+            <h2 class="text-2xl md:text-3xl font-bold text-white mt-2">
+                수료 후, <span class="text-cyan-400">이런 곳으로 취업합니다</span>
             </h2>
         </div>
         
-        <div class="w-full relative flex overflow-hidden">
+        <div class="w-full relative flex overflow-hidden border-y border-slate-800 py-4 bg-slate-900/50">
             <div class="flex w-max animate-marquee gap-6 px-3">
-                <!-- Data repeated twice for seamless loop -->
-                <script>
-                    const companies = [
-                        { name: "에스지엔", course: "AI사물인터넷 MCU기반(STM32,ESP32) 임베디드펌웨어 전문가양성 8회차" },
-                        { name: "케이사인", course: "DB보안솔루션(JAVA,C++)개발자 양성 8회차" },
-                        { name: "파우스", course: "영상AI(컴퓨터비전)을 활용한 사물인터넷(IOT) 개발자 양성 4회차" },
-                        { name: "씨엘옵틱스", course: "영상AI(컴퓨터비전)을 활용한 사물인터넷(IOT) 개발자 양성 6회차" },
-                        { name: "플랜티팜", course: "영상AI(컴퓨터비전)을 활용한 사물인터넷(IOT) 개발자 양성 5회차" },
-                        { name: "클래시스", course: "영상AI(컴퓨터비전)을 활용한 사물인터넷(IOT) 개발자 양성 5회차" },
-                        { name: "파인에스엔에스", course: "AI사물인터넷 MCU기반(STM32,ESP32) 임베디드펌웨어 전문가양성 7회차" },
-                        { name: "알이디티", course: "영상AI(컴퓨터비전)을 활용한 사물인터넷(IOT) 개발자 양성 4회차" },
-                        { name: "지그탑", course: "영상AI(컴퓨터비전)을 활용한 사물인터넷(IOT) 개발자 양성 4회차" }
-                    ];
-                    
-                    const container = document.querySelector('.animate-marquee');
-                    let html = '';
-                    // Duplicate for loop
-                    [...companies, ...companies].forEach(c => {
-                        html += `
-                        <div class="w-80 md:w-96 flex-shrink-0 bg-slate-800 border border-slate-800 p-6 rounded-2xl flex flex-col justify-center shadow-sm">
-                            <div class="font-black text-xl text-blue-400 mb-2">${c.name}</div>
-                            <div class="text-sm font-medium text-slate-500 leading-tight">${c.course}</div>
-                        </div>`;
-                    });
-                    container.innerHTML = html;
-                </script>
+                <div class="w-80 flex-shrink-0 bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-sm"><div class="font-black text-lg text-cyan-400 mb-1">에스지엔</div><div class="text-xs text-slate-400">AI사물인터넷 MCU기반 임베디드펌웨어 8회차</div></div>
+                <div class="w-80 flex-shrink-0 bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-sm"><div class="font-black text-lg text-cyan-400 mb-1">케이사인</div><div class="text-xs text-slate-400">DB보안솔루션(JAVA,C++)개발자 8회차</div></div>
+                <div class="w-80 flex-shrink-0 bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-sm"><div class="font-black text-lg text-cyan-400 mb-1">파우스</div><div class="text-xs text-slate-400">영상AI(컴퓨터비전) IoT 개발자 4회차</div></div>
+                <div class="w-80 flex-shrink-0 bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-sm"><div class="font-black text-lg text-cyan-400 mb-1">씨엘옵틱스</div><div class="text-xs text-slate-400">영상AI 컴퓨터비전 사물인터넷 6회차</div></div>
+                <div class="w-80 flex-shrink-0 bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-sm"><div class="font-black text-lg text-cyan-400 mb-1">플랜티팜</div><div class="text-xs text-slate-400">영상AI IoT 개발자 5회차</div></div>
+                <div class="w-80 flex-shrink-0 bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-sm"><div class="font-black text-lg text-cyan-400 mb-1">클래시스</div><div class="text-xs text-slate-400">영상AI IoT 개발자 5회차</div></div>
+                <div class="w-80 flex-shrink-0 bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-sm"><div class="font-black text-lg text-cyan-400 mb-1">파인에스엔에스</div><div class="text-xs text-slate-400">임베디드펌웨어 전문가양성 7회차</div></div>
+                <div class="w-80 flex-shrink-0 bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-sm"><div class="font-black text-lg text-cyan-400 mb-1">알이디티</div><div class="text-xs text-slate-400">영상AI IoT 개발자 4회차</div></div>
+                <div class="w-80 flex-shrink-0 bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-sm"><div class="font-black text-lg text-cyan-400 mb-1">지그탑</div><div class="text-xs text-slate-400">영상AI 사물인터넷 개발자 4회차</div></div>
+                <!-- 무한 루프 복제 아이템 -->
+                <div class="w-80 flex-shrink-0 bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-sm"><div class="font-black text-lg text-cyan-400 mb-1">에스지엔</div><div class="text-xs text-slate-400">AI사물인터넷 MCU기반 임베디드펌웨어 8회차</div></div>
+                <div class="w-80 flex-shrink-0 bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-sm"><div class="font-black text-lg text-cyan-400 mb-1">케이사인</div><div class="text-xs text-slate-400">DB보안솔루션(JAVA,C++)개발자 8회차</div></div>
+                <div class="w-80 flex-shrink-0 bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-sm"><div class="font-black text-lg text-cyan-400 mb-1">파우스</div><div class="text-xs text-slate-400">영상AI(컴퓨터비전) IoT 개발자 4회차</div></div>
             </div>
         </div>
-    </section>
 
-    <!-- Employment Rate Section -->
-    <section class="py-24 bg-slate-900 overflow-hidden border-b border-slate-800">
-        <div class="max-w-5xl mx-auto px-4">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-blue-400 font-bold tracking-wider text-sm uppercase">한직교 취업률</span>
-                <h2 class="text-3xl md:text-4xl font-bold mt-2 leading-tight">
-                    취업률이 말해주는<br />
-              <span class="text-blue-400">정보보안</span>
-                </h2>
+        <div class="max-w-4xl mx-auto px-4 mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-slate-900 rounded-3xl p-8 text-center border border-blue-500/40 shadow-xl relative overflow-hidden" data-aos="fade-right">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-blue-900/30 rounded-bl-full pointer-events-none"></div>
+                <span class="text-xs font-bold text-yellow-400 bg-blue-950 px-3 py-1 rounded-full border border-blue-800 mb-4 inline-block">
+                    ★ AI/보안 수료생 취업률 ★
+                </span>
+                <div class="text-6xl font-black text-cyan-400 mb-4">100%</div>
+                <p class="text-xs text-slate-300 font-semibold bg-slate-800/80 py-2.5 px-4 rounded-xl">
+                    정보보안(모의해킹)기반 ICT 구직자 양성과정 수료생 기준
+                </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <div class="bg-slate-800 rounded-3xl p-10 text-center border border-slate-800 shadow-sm relative overflow-hidden" data-aos="fade-right">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-blue-900/30 rounded-bl-full -z-0 opacity-50"></div>
-                    <h3 class="text-xl font-bold text-white mb-6 relative z-10 underline decoration-blue-500 decoration-4 underline-offset-4"><span class="text-yellow-400 mr-2 text-2xl">★</span>AI/보안 수료생 취업률<span class="text-yellow-400 ml-2 text-2xl">★</span></h3>
-                    <div class="text-6xl font-black text-blue-400 mb-6 relative z-10 animate-pulse">
-                        100%
-                    </div>
-                    <p class="text-base text-slate-200 font-bold relative z-10 bg-blue-900/30 py-3 rounded-lg shadow-inner">
-                        정보보안(모의해킹)기반 ICT 구직자 양성<br/>수료생 기준입니다.
-                    </p>
+            <div class="bg-slate-900 rounded-3xl p-8 text-center border border-cyan-500/40 shadow-xl relative overflow-hidden" data-aos="fade-left" data-aos-delay="200">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-900/20 rounded-bl-full pointer-events-none"></div>
+                <span class="text-xs font-bold text-cyan-300 bg-cyan-950 px-3 py-1 rounded-full border border-cyan-800 mb-4 inline-block">
+                    ★ AI/보안 수료생 평균 연봉 ★
+                </span>
+                <div class="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300 mb-4">
+                    4,300<span class="text-2xl text-slate-300 font-bold ml-1">만원</span>
                 </div>
-
-                <div class="bg-slate-800 rounded-3xl p-10 text-center border border-slate-800 shadow-sm relative overflow-hidden" data-aos="fade-left" data-aos-delay="200">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-cyan-100 rounded-bl-full -z-0 opacity-50"></div>
-                    <h3 class="text-xl font-bold text-slate-300 mb-6 relative z-10">AI/보안 수료생 평균 연봉</h3>
-                    <div class="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 mb-6 relative z-10">
-                        4,300<span class="text-3xl">만원</span>
-                    </div>
-                    <p class="text-sm text-slate-500 relative z-10">
-                        2025년 기준 한직교 보안 수료생 연봉
-                    </p>
-                </div>
+                <p class="text-xs text-slate-400">
+                    2025년 기준 한직교 보안 직무 수료생 실제 취업 기준
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- Employment Support Section -->
-    <section class="py-24 bg-slate-800">
-        <div class="max-w-5xl mx-auto px-4">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-blue-400 font-bold tracking-wider text-sm uppercase">취업지원</span>
-                <h2 class="text-3xl md:text-4xl font-bold mt-2 leading-tight">
-                    수료 후까지 이어지는<br />
-                    취업지원시스템
-                </h2>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="support-container">
-                <script>
-                    const supportData = [
-                        { step: "STEP 1", title: "1:1 상담으로 취업전략 설계", items: ["취업역량 진단", "취업 니즈 분석", "맞춤형 채용정보 제공"] },
-                        { step: "STEP 2", title: "실전 취업 준비", items: ["취업역량 강화 교육", "이력서·자기소개서 1:1 첨삭", "면접특강&모의면접"] },
-                        { step: "STEP 3", title: "취업활동 지원", items: ["동행면접", "채용행사&현장면접", "대외 취업정보 제공"] },
-                        { step: "STEP 4", title: "6개월 사후관리", items: ["취업 후 적응 상담", "경력 개발 코칭", "6개월 지속 모니터링"] }
-                    ];
-
-                    const suppContainer = document.getElementById('support-container');
-                    let suppHtml = '';
-                    supportData.forEach((s, idx) => {
-                        const items = s.items.map(i => `<li class="flex items-start gap-2 text-slate-300 font-medium"><i class="fa-solid fa-circle-check text-blue-500 mt-1"></i><span>${i}</span></li>`).join('');
-                        suppHtml += `
-                        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 shadow-sm flex flex-col h-full hover:shadow-md transition-shadow relative overflow-hidden" data-aos="fade-up" data-aos-delay="${idx * 100}">
-                            <div class="absolute top-0 right-0 w-24 h-24 bg-blue-900/20 rounded-bl-full -z-0 opacity-50"></div>
-                            <div class="relative z-10">
-                                <span class="inline-block py-1 px-3 bg-blue-900/30 text-blue-400 font-bold rounded-lg text-sm mb-4">${s.step}</span>
-                                <h3 class="text-xl font-bold text-white mb-6">${s.title}</h3>
-                                <ul class="space-y-3">${items}</ul>
-                            </div>
-                        </div>`;
-                    });
-                    suppContainer.innerHTML = suppHtml;
-                </script>
-            </div>
-        </div>
-    </section>
-
-    <!-- Curriculum Section -->
-    <section class="py-24 bg-slate-900">
+    <!-- 9. CURRICULUM ACCORDION SECTION -->
+    <section class="py-20 bg-slate-900 border-t border-slate-800">
         <div class="max-w-4xl mx-auto px-4">
             <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-blue-400 font-bold tracking-wider text-sm uppercase">커리큘럼</span>
+                <span class="text-cyan-400 font-bold tracking-wider text-xs uppercase bg-cyan-950 px-3 py-1 rounded-full border border-cyan-800">Curriculum</span>
                 <h2 class="text-3xl md:text-4xl font-bold mt-2 leading-tight">
                     전문가로 성장하는<br />
                     실무완성 커리큘럼
                 </h2>
+                <p class="text-xs text-slate-400 mt-2">각 단계를 클릭하시면 세부 교육 내용을 확인하실 수 있습니다</p>
             </div>
             
-            <div class="flex flex-col gap-2" id="curriculum-container">
-                <script>
-                    const curriculumData = [
-                        { step: "STEP 1", title: "NW보안기초", items: ["NW보안구축"] },
-                        { step: "STEP 2", title: "시스템 운영 관리", items: ["정보 시스템 진단", "관리적 보안 구축", "관리적 보안 운영"] },
-                        { step: "STEP 3", title: "서비스 및 보안 구축", items: ["서비스 / DB보안 기초", "시스템 보안 구축", "SW개발 보안 구축", "DB보안 구축"] },
-                        { step: "STEP 4", title: "서버 운영 관리", items: ["운영체제 기초", "서버구축", "서버운영관리"] },
-                        { step: "STEP 5", title: "DB운영관리", items: ["데이터베이스 기초", "DB설계/구현", "DB관리"] },
-                        { step: "STEP 6", title: "SW 프로그래밍 언어", items: ["프로그래밍 언어 기초", "프로그램 설계", "애플리케이션 개발"] },
-                        { step: "STEP 7", title: "네트워크 보안 구축/운영", items: ["네트워크 기초", "네트워크 설정", "네트워크 계층", "패킷 분석"] },
-                        { step: "STEP 8", title: "팀 프로젝트", items: ["프로젝트 설계", "프로젝트구현", "현장전문가 특별강의"] }
-                    ];
+            <div class="flex flex-col gap-3" id="curriculum-container">
+                <div class="border border-slate-800 rounded-2xl overflow-hidden bg-slate-950 shadow-sm" data-aos="fade-up">
+                    <button onclick="toggleAccordion(0)" class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-900 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <span class="text-cyan-400 font-black text-sm bg-cyan-950 px-2.5 py-1 rounded border border-cyan-800">STEP 1</span>
+                            <span class="font-bold text-base text-white">NW보안기초 & 인프라 설계</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-slate-500 accordion-icon" id="icon-0"></i>
+                    </button>
+                    <div class="accordion-content bg-slate-900/60 border-t border-slate-800 px-6" id="content-0">
+                        <ul class="space-y-2 text-xs md:text-sm text-slate-300">
+                            <li>• 네트워크 기초 프로토콜(TCP/IP) 분석 및 스위칭/라우팅 설정</li>
+                            <li>• Wireshark 패킷 캡처를 통한 네트워크 이상 트래픽 탐지 기법</li>
+                        </ul>
+                    </div>
+                </div>
 
-                    const currContainer = document.getElementById('curriculum-container');
-                    let currHtml = '';
-                    curriculumData.forEach((c, idx) => {
-                        const items = c.items.map(i => `<li class="flex items-start gap-3 text-slate-200 font-medium md:pl-28"><span class="text-blue-500 font-bold mt-0.5">-</span>${i.replace(/^- /, '')}</li>`).join('');
-                        currHtml += `
-                        <div class="border border-slate-700 rounded-2xl overflow-hidden bg-slate-900 shadow-sm" data-aos="fade-up" data-aos-delay="${idx * 50}">
-                            <button onclick="toggleAccordion(${idx})" class="w-full flex items-center justify-between p-6 text-left hover:bg-slate-800 transition-colors">
-                                <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
-                                    <span class="text-blue-400 font-black text-xl whitespace-nowrap w-24">${c.step}</span>
-                                    <span class="font-bold text-lg text-white">${c.title}</span>
-                                </div>
-                                <div class="accordion-icon" id="icon-${idx}">
-                                    <i class="fa-solid fa-chevron-down text-slate-500"></i>
-                                </div>
-                            </button>
-                            <div class="accordion-content bg-slate-800 border-t border-slate-800 px-6" id="content-${idx}">
-                                <ul class="space-y-3 mt-4">
-                                    ${items}
-                                </ul>
-                            </div>
-                        </div>`;
-                    });
-                    currContainer.innerHTML = currHtml;
+                <div class="border border-slate-800 rounded-2xl overflow-hidden bg-slate-950 shadow-sm" data-aos="fade-up">
+                    <button onclick="toggleAccordion(1)" class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-900 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <span class="text-cyan-400 font-black text-sm bg-cyan-950 px-2.5 py-1 rounded border border-cyan-800">STEP 2</span>
+                            <span class="font-bold text-base text-white">시스템 운영 관리 & 취약점 진단</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-slate-500 accordion-icon" id="icon-1"></i>
+                    </button>
+                    <div class="accordion-content bg-slate-900/60 border-t border-slate-800 px-6" id="content-1">
+                        <ul class="space-y-2 text-xs md:text-sm text-slate-300">
+                            <li>• 정보 시스템 취약점 진단 가이드라인 기반 모의 진단 실습</li>
+                            <li>• 관리적·기술적 보안 체계 수립 및 감사 로그 분석</li>
+                        </ul>
+                    </div>
+                </div>
 
-                    function toggleAccordion(idx) {
-                        const content = document.getElementById('content-' + idx);
-                        const icon = document.getElementById('icon-' + idx);
-                        const isOpen = content.classList.contains('open');
+                <div class="border border-slate-800 rounded-2xl overflow-hidden bg-slate-950 shadow-sm" data-aos="fade-up">
+                    <button onclick="toggleAccordion(2)" class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-900 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <span class="text-cyan-400 font-black text-sm bg-cyan-950 px-2.5 py-1 rounded border border-cyan-800">STEP 3</span>
+                            <span class="font-bold text-base text-white">서비스 및 웹/DB 보안 구축</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-slate-500 accordion-icon" id="icon-2"></i>
+                    </button>
+                    <div class="accordion-content bg-slate-900/60 border-t border-slate-800 px-6" id="content-2">
+                        <ul class="space-y-2 text-xs md:text-sm text-slate-300">
+                            <li>• 웹 취약점(OWASP Top 10) 대응 및 시큐어 코딩(Secure Coding)</li>
+                            <li>• DB 접근 제어, 데이터 암호화 및 무결성 관리</li>
+                        </ul>
+                    </div>
+                </div>
 
-                        document.querySelectorAll('.accordion-content').forEach(el => el.classList.remove('open'));
-                        document.querySelectorAll('.accordion-icon').forEach(el => el.classList.remove('open'));
+                <div class="border border-slate-800 rounded-2xl overflow-hidden bg-slate-950 shadow-sm" data-aos="fade-up">
+                    <button onclick="toggleAccordion(3)" class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-900 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <span class="text-cyan-400 font-black text-sm bg-cyan-950 px-2.5 py-1 rounded border border-cyan-800">STEP 4</span>
+                            <span class="font-bold text-base text-white">서버 운영 관리 (Linux / Windows)</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-slate-500 accordion-icon" id="icon-3"></i>
+                    </button>
+                    <div class="accordion-content bg-slate-900/60 border-t border-slate-800 px-6" id="content-3">
+                        <ul class="space-y-2 text-xs md:text-sm text-slate-300">
+                            <li>• Linux/Unix 엔터프라이즈 서버 환경 구축 및 권한 제어</li>
+                            <li>• 서버 침해사고 대응 및 시스템 하드닝(Hardening)</li>
+                        </ul>
+                    </div>
+                </div>
 
-                        if (!isOpen) {
-                            content.classList.add('open');
-                            icon.classList.add('open');
-                        }
-                    }
-                </script>
+                <div class="border border-slate-800 rounded-2xl overflow-hidden bg-slate-950 shadow-sm" data-aos="fade-up">
+                    <button onclick="toggleAccordion(4)" class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-900 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <span class="text-cyan-400 font-black text-sm bg-cyan-950 px-2.5 py-1 rounded border border-cyan-800">STEP 5</span>
+                            <span class="font-bold text-base text-white">데이터베이스 운영관리 & SQL</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-slate-500 accordion-icon" id="icon-4"></i>
+                    </button>
+                    <div class="accordion-content bg-slate-900/60 border-t border-slate-800 px-6" id="content-4">
+                        <ul class="space-y-2 text-xs md:text-sm text-slate-300">
+                            <li>• 관계형 DB(MySQL/PostgreSQL) 스키마 설계 및 트랜잭션 제어</li>
+                            <li>• SQL Injection 방어 패턴 구현 및 DB 접근 권한 통제</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="border border-slate-800 rounded-2xl overflow-hidden bg-slate-950 shadow-sm" data-aos="fade-up">
+                    <button onclick="toggleAccordion(5)" class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-900 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <span class="text-cyan-400 font-black text-sm bg-cyan-950 px-2.5 py-1 rounded border border-cyan-800">STEP 6</span>
+                            <span class="font-bold text-base text-white">SW 프로그래밍 & AI 보안 엔진 개발</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-slate-500 accordion-icon" id="icon-5"></i>
+                    </button>
+                    <div class="accordion-content bg-slate-900/60 border-t border-slate-800 px-6" id="content-5">
+                        <ul class="space-y-2 text-xs md:text-sm text-slate-300">
+                            <li>• Python 기반 보안 자동화 도구 제작 및 데이터 분석</li>
+                            <li>• 머신러닝 이상 징후 탐지 알고리즘 및 웹 접근제어 로직 구현</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="border border-slate-800 rounded-2xl overflow-hidden bg-slate-950 shadow-sm" data-aos="fade-up">
+                    <button onclick="toggleAccordion(6)" class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-900 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <span class="text-cyan-400 font-black text-sm bg-cyan-950 px-2.5 py-1 rounded border border-cyan-800">STEP 7</span>
+                            <span class="font-bold text-base text-white">네트워크 보안 구축 & 침해대응</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-slate-500 accordion-icon" id="icon-6"></i>
+                    </button>
+                    <div class="accordion-content bg-slate-900/60 border-t border-slate-800 px-6" id="content-6">
+                        <ul class="space-y-2 text-xs md:text-sm text-slate-300">
+                            <li>• 방화벽, IDS/IPS 침입 차단 시스템 룰셋 구축</li>
+                            <li>• 실시간 통합 보안관제(SIEM) 로그 모니터링 실습</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="border border-slate-800 rounded-2xl overflow-hidden bg-slate-950 shadow-sm" data-aos="fade-up">
+                    <button onclick="toggleAccordion(7)" class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-900 transition-colors">
+                        <div class="flex items-center gap-4">
+                            <span class="text-cyan-400 font-black text-sm bg-cyan-950 px-2.5 py-1 rounded border border-cyan-800">STEP 8</span>
+                            <span class="font-bold text-base text-white">기업 연계 캡스톤 팀 프로젝트</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-slate-500 accordion-icon" id="icon-7"></i>
+                    </button>
+                    <div class="accordion-content bg-slate-900/60 border-t border-slate-800 px-6" id="content-7">
+                        <ul class="space-y-2 text-xs md:text-sm text-slate-300">
+                            <li>• 현업 실무자 멘토링 기반 'AI 웹 접근제어 보안 솔루션' 상용급 개발</li>
+                            <li>• 최종 결과물 시연회 및 1:1 포트폴리오 면접 컨설팅</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Benefits Section -->
-    <section class="py-24 bg-slate-800">
+    <!-- 10. BENEFITS SECTION -->
+    <section class="py-20 bg-slate-950">
         <div class="max-w-5xl mx-auto px-4">
             <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-blue-400 font-bold tracking-wider text-sm uppercase">한직교 혜택</span>
+                <span class="text-cyan-400 font-bold tracking-wider text-xs uppercase bg-cyan-950 px-3 py-1 rounded-full border border-cyan-800">Benefits</span>
                 <h2 class="text-3xl md:text-4xl font-bold mt-2 leading-tight">
                     수강생의 성장을 위한<br />
                     한직교 맞춤 혜택
                 </h2>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                
-                <div class="bg-slate-900 p-8 rounded-3xl shadow-sm border border-slate-800 flex flex-col items-center text-center hover:shadow-md transition-shadow relative overflow-hidden" data-aos="fade-up" data-aos-delay="100">
-                    <div class="absolute top-0 w-full h-1 bg-gradient-to-r from-blue-400 to-cyan-400"></div>
-                    <div class="w-16 h-16 bg-blue-900/20 text-blue-500 rounded-2xl flex items-center justify-center mb-6 mt-2">
-                        <i class="fa-solid fa-gift text-3xl"></i>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-slate-900 p-8 rounded-3xl border border-slate-800 flex flex-col items-center text-center shadow-sm relative overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-14 h-14 bg-cyan-950 text-cyan-400 rounded-2xl flex items-center justify-center mb-4 border border-cyan-800">
+                        <i class="fa-solid fa-gift text-2xl"></i>
                     </div>
-                    <span class="text-sm font-bold text-blue-400 bg-blue-900/20 px-3 py-1 rounded-full mb-4">혜택 1</span>
-                    <h3 class="text-xl font-bold text-white mb-4">국민내일배움카드 수강료 지원</h3>
-                    <p class="text-slate-300 leading-relaxed">국민내일배움카드를 통해 교육비 부담 없이 실무 위주의 전문 교육을 수강할 수 있습니다.</p>
+                    <span class="text-xs font-bold text-cyan-400 bg-cyan-950 px-3 py-1 rounded-full mb-3 border border-cyan-800">혜택 1</span>
+                    <h3 class="text-lg font-bold text-white mb-2 whitespace-nowrap">국민내일배움카드 수강료 국비지원</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed">훈련비 10,140,390원 대부분을 국비지원 혜택으로 수강료 부담을 덜고 실무 위주의 전문 보안 교육을 수강할 수 있습니다.</p>
                 </div>
 
-                <div class="bg-slate-900 p-8 rounded-3xl shadow-sm border border-slate-800 flex flex-col items-center text-center hover:shadow-md transition-shadow relative overflow-hidden" data-aos="fade-up" data-aos-delay="200">
-                    <div class="absolute top-0 w-full h-1 bg-gradient-to-r from-blue-400 to-cyan-400"></div>
-                    <div class="w-16 h-16 bg-blue-900/20 text-blue-500 rounded-2xl flex items-center justify-center mb-6 mt-2">
-                        <i class="fa-solid fa-gift text-3xl"></i>
+                <div class="bg-slate-900 p-8 rounded-3xl border border-slate-800 flex flex-col items-center text-center shadow-sm relative overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-14 h-14 bg-cyan-950 text-cyan-400 rounded-2xl flex items-center justify-center mb-4 border border-cyan-800">
+                        <i class="fa-solid fa-coins text-2xl"></i>
                     </div>
-                    <span class="text-sm font-bold text-blue-400 bg-blue-900/20 px-3 py-1 rounded-full mb-4">혜택 2</span>
-                    <h3 class="text-xl font-bold text-white mb-4">훈련장려금 지원<br/><span class="text-base text-blue-400">국취제 연계시 최대 80만원 지원</span></h3>
-                    <p class="text-slate-300 leading-relaxed">훈련장려금 제도를 활용해 훈련기간 동안 실질적인 생활비 보탬을 받을 수 있습니다.</p>
+                    <span class="text-xs font-bold text-cyan-400 bg-cyan-950 px-3 py-1 rounded-full mb-3 border border-cyan-800">혜택 2</span>
+                    <h3 class="text-lg font-bold text-white mb-2 whitespace-nowrap">매월 최대 80만원 훈련장려금</h3>
+                    <p class="text-slate-400 text-xs leading-relaxed">훈련 기간 동안 실질적인 생활비 보탬을 받을 수 있도록 국민취업지원제도 연계 훈련장려금을 지원합니다.</p>
                 </div>
 
-                <div class="bg-blue-900/20 p-8 rounded-3xl shadow-sm border border-blue-800 shadow-blue-100 flex flex-col items-center text-center hover:shadow-md transition-shadow relative overflow-hidden" data-aos="fade-up" data-aos-delay="300">
-                    <div class="absolute top-0 w-full h-1 bg-blue-600"></div>
-                    <div class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center mb-6 mt-2">
-                        <i class="fa-solid fa-gift text-3xl"></i>
+                <div class="bg-gradient-to-br from-slate-900 to-blue-950/60 p-8 rounded-3xl border border-blue-500/50 flex flex-col items-center text-center shadow-lg relative overflow-hidden" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-14 h-14 bg-blue-600 text-white rounded-2xl flex items-center justify-center mb-4 shadow-md">
+                        <i class="fa-solid fa-hotel text-2xl"></i>
                     </div>
-                    <span class="text-sm font-bold text-white bg-blue-600 px-3 py-1 rounded-full mb-4">혜택 3</span>
-                    <h3 class="text-xl font-bold text-blue-800 mb-4"><span class="text-yellow-400 mr-2 text-2xl">★</span>기숙사 운영<span class="text-yellow-400 ml-2 text-2xl">★</span></h3>
-                    <p class="text-blue-400 font-bold leading-relaxed">원거리 수강생도 걱정 없이 참여할 수 있도록 쾌적한 기숙사를 운영합니다.</p>
+                    <span class="text-xs font-bold text-white bg-blue-600 px-3 py-1 rounded-full mb-3">혜택 3 ★ 기숙사</span>
+                    <h3 class="text-lg font-bold text-white mb-2 whitespace-nowrap">원거리 수강생 쾌적한 기숙사 운영</h3>
+                    <p class="text-slate-300 text-xs leading-relaxed">지방 및 원거리 수강생도 통학 부담 없이 참여할 수 있도록 쾌적한 최신 기숙사를 운영합니다.</p>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="py-24 bg-slate-900">
+    <!-- 11. FAQ SECTION -->
+    <section class="py-20 bg-slate-900 border-t border-slate-800">
         <div class="max-w-4xl mx-auto px-4">
             <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-blue-400 font-bold tracking-wider text-sm uppercase">FAQ</span>
-                <h2 class="text-3xl md:text-4xl font-bold mt-2 leading-tight">
-                    자주묻는질문
-                </h2>
+                <span class="text-cyan-400 font-bold tracking-wider text-xs uppercase bg-cyan-950 px-3 py-1 rounded-full border border-cyan-800">FAQ</span>
+                <h2 class="text-3xl md:text-4xl font-bold mt-2 leading-tight">자주 묻는 질문</h2>
             </div>
             
-            <div class="flex flex-col gap-3" id="faq-container">
-                <script>
-                    const faqData = [
-                        {
-                            q: "제가 고졸인데도 취업이 될까요?",
-                            a: "네 가능합니다.\nAI/보안 등 IT 직종 분야의 경우 이력서보다는 개인 실력이 중요하며 내 실력을 보여줄 수 있는 포트폴리오로 학력, 경력의 벽을 넘을 수 있습니다. 한국직업능력교육원에서 취업을 위한 포트폴리오까지 지원해드려요 :)"
-                        },
-                        {
-                            q: "성별의 제한이 있나요?",
-                            a: "절대 없습니다.\n개발자는 대부분 남자이다보니 남성들의 직업이라 오해하시지만 여성 개발자도 현업에 많으며 실제 한직교 교육의 경우에도 여성 비율이 높은 편입니다."
-                        },
-                        {
-                            q: "나이의 제한이 있나요 ?",
-                            a: "전혀 없습니다.\nAI, IT 분야는 신기술에 속하지만 기존 직종/분야와 융합이 가능하여 20~50대 취업도 가능할 뿐더러 60대 이상 창업도 가능합니다.\n(수료생 창업 사례가 많습니다)"
-                        },
-                        {
-                            q: "자격증도 취득하나요?",
-                            a: "자격증은 없습니다.\nIT 분야는 자격증이나 경력보다는 개인의 실력이 가장 중요하며 관련 자격증들이 있지만 취업에 대한 확률이나 연봉에는 영향을 미치지 않습니다."
-                        }
-                    ];
-
-                    const faqContainer = document.getElementById('faq-container');
-                    let faqHtml = '';
-                    faqData.forEach((f, idx) => {
-                        faqHtml += `
-                        <div class="border border-slate-700 rounded-2xl overflow-hidden bg-slate-900 shadow-sm" data-aos="fade-up" data-aos-delay="${idx * 100}">
-                            <button onclick="toggleFaq(${idx})" class="w-full flex items-center justify-between p-6 text-left hover:bg-slate-800 transition-colors">
-                                <div class="flex gap-4 items-start">
-                                    <span class="text-blue-400 font-black text-xl">Q.</span>
-                                    <span class="font-bold text-lg text-white leading-tight mt-0.5">${f.q}</span>
-                                </div>
-                                <div class="accordion-icon" id="faq-icon-${idx}">
-                                    <i class="fa-solid fa-chevron-down text-slate-500"></i>
-                                </div>
-                            </button>
-                            <div class="accordion-content bg-slate-800 border-t border-slate-800 px-6" id="faq-content-${idx}">
-                                <div class="flex gap-4 mt-4">
-                                    <span class="text-slate-500 font-black text-xl">A.</span>
-                                    <p class="text-slate-200 font-medium whitespace-pre-line leading-relaxed">${f.a}</p>
-                                </div>
-                            </div>
-                        </div>`;
-                    });
-                    faqContainer.innerHTML = faqHtml;
-
-                    function toggleFaq(idx) {
-                        const content = document.getElementById('faq-content-' + idx);
-                        const icon = document.getElementById('faq-icon-' + idx);
-                        const isOpen = content.classList.contains('open');
-
-                        // 닫기 로직 (선택적)
-                        document.querySelectorAll('[id^="faq-content-"]').forEach(el => el.classList.remove('open'));
-                        document.querySelectorAll('[id^="faq-icon-"]').forEach(el => el.classList.remove('open'));
-
-                        if (!isOpen) {
-                            content.classList.add('open');
-                            icon.classList.add('open');
-                        }
-                    }
-                </script>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Form Section -->
-    <section class="py-24 bg-slate-800 border-t border-slate-800" id="contact">
-        <div class="max-w-3xl mx-auto px-4">
-            <div class="text-center mb-12" data-aos="fade-up">
-                <span class="text-blue-400 font-bold tracking-wider text-sm uppercase">과정신청</span>
-                <h2 class="text-3xl md:text-4xl font-bold mt-2 leading-tight">
-                    교육과정 신청하기
-                </h2>
-            </div>
-            
-            <div class="bg-slate-900 p-8 md:p-12 rounded-3xl shadow-sm border border-slate-800 relative overflow-hidden" data-aos="fade-up" data-aos-delay="100">
-                <div class="absolute top-0 w-full left-0 h-1 bg-gradient-to-r from-blue-400 to-cyan-400"></div>
-                
-                <div id="success-message" class="hidden text-center py-16">
-                    <div class="w-20 h-20 bg-green-50 text-green-500 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                        <i class="fa-solid fa-check text-4xl"></i>
+            <div class="flex flex-col gap-3">
+                <div class="border border-slate-800 rounded-2xl overflow-hidden bg-slate-950 shadow-sm" data-aos="fade-up">
+                    <button onclick="toggleFaq(0)" class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-900 transition-colors">
+                        <div class="flex gap-3 items-center">
+                            <span class="text-cyan-400 font-black text-lg">Q.</span>
+                            <span class="font-bold text-base text-white">제가 컴퓨터 비전공자나 고졸인데도 진짜 취업이 가능한가요?</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-slate-500 accordion-icon" id="faq-icon-0"></i>
+                    </button>
+                    <div class="accordion-content bg-slate-900/60 border-t border-slate-800 px-6" id="faq-content-0">
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            네, 충분히 가능합니다! AI/보안 등 IT 기술직은 이력서 스펙보다 본인이 직접 구현해본 포트폴리오와 실무 역량이 결정적입니다. 본 교육원은 기초부터 탄탄히 쌓아 올려 완성도 높은 프로젝트 포트폴리오를 제작할 수 있도록 지원합니다.
+                        </p>
                     </div>
-                    <h3 class="text-2xl font-bold text-white mb-4">상담 신청이 완료되었습니다!</h3>
-                    <p class="text-slate-500">빠른 시일 내에 연락드리겠습니다.</p>
                 </div>
 
-                <form id="contact-form" action="https://inputhaven.com/api/v1/submit" method="POST" onsubmit="submitForm(event)">
-                    <input type="hidden" name="_form_id" value="ca2310b9e38c197dfb7ef162b557d80a" />
-                    
-                    <div class="space-y-6">
-                        <div>
-                            <label class="block text-sm font-bold text-slate-200 mb-2">과정명</label>
-                            <input type="text" name="과정명" value="AI기반 웹 접근제어 보안 솔루션 개발자 양성(한국직업능력교육원 안산캠퍼스)" readonly class="w-full bg-slate-800 border border-slate-700 text-slate-500 rounded-xl px-4 py-3 outline-none font-medium cursor-not-allowed" />
+                <div class="border border-slate-800 rounded-2xl overflow-hidden bg-slate-950 shadow-sm" data-aos="fade-up">
+                    <button onclick="toggleFaq(1)" class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-900 transition-colors">
+                        <div class="flex gap-3 items-center">
+                            <span class="text-cyan-400 font-black text-lg">Q.</span>
+                            <span class="font-bold text-base text-white">성별이나 나이의 제한이 있나요?</span>
                         </div>
-                        
-                        <div>
-                            <label class="block text-sm font-bold text-slate-200 mb-2">이름</label>
-                            <input type="text" name="name" placeholder="홍길동" required class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all font-medium placeholder:text-slate-500" />
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-bold text-slate-200 mb-2">연락처</label>
-                            <input type="tel" name="phone" placeholder="010-0000-0000" required class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all font-medium placeholder:text-slate-500" />
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-bold text-slate-200 mb-2">생년월일</label>
-                            <input type="text" name="birthdate" placeholder="000000 6자리" required class="w-full bg-slate-900 border border-slate-700 text-white rounded-xl px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100 transition-all font-medium placeholder:text-slate-500" />
-                        </div>
-                        
-                        <div class="flex items-start gap-3 mt-8 p-4 bg-slate-800 rounded-xl border border-slate-800">
-                            <input type="checkbox" id="privacy-agree" required class="mt-1 w-5 h-5 text-blue-400 bg-slate-900 border-slate-600 rounded focus:ring-blue-500 cursor-pointer" />
-                            <div class="flex-1">
-                                <label for="privacy-agree" class="text-sm font-medium text-slate-200 cursor-pointer select-none">개인정보 취급방침에 동의합니다.</label>
-                                <button type="button" onclick="openPrivacyModal()" class="text-sm font-bold text-blue-400 ml-2 hover:underline">자세히 보기</button>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-blue-500/30 transition-all hover:-translate-y-1 mt-4">
-                            과정신청하기
-                        </button>
+                        <i class="fa-solid fa-chevron-down text-slate-500 accordion-icon" id="faq-icon-1"></i>
+                    </button>
+                    <div class="accordion-content bg-slate-900/60 border-t border-slate-800 px-6" id="faq-content-1">
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            전혀 없습니다! 20대부터 30대, 40대까지 다양한 연령대의 비전공자가 성공적으로 취업하고 있으며, 여성 개발자 수료생 비율 또한 지속적으로 증가하고 있습니다.
+                        </p>
                     </div>
-                </form>
+                </div>
+
+                <div class="border border-slate-800 rounded-2xl overflow-hidden bg-slate-950 shadow-sm" data-aos="fade-up">
+                    <button onclick="toggleFaq(2)" class="w-full flex items-center justify-between p-5 text-left hover:bg-slate-900 transition-colors">
+                        <div class="flex gap-3 items-center">
+                            <span class="text-cyan-400 font-black text-lg">Q.</span>
+                            <span class="font-bold text-base text-white">교육비 국비지원 혜택 및 자비부담금은 어떻게 되나요?</span>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-slate-500 accordion-icon" id="faq-icon-2"></i>
+                    </button>
+                    <div class="accordion-content bg-slate-900/60 border-t border-slate-800 px-6" id="faq-content-2">
+                        <p class="text-slate-300 text-sm leading-relaxed">
+                            고용노동부 국민내일배움카드 발급을 통해 약 1,014만 원 상당의 교육비가 대폭 국비 지원되며, 참여 유형(국민취업지원제도 1·2유형, 일반구직자 등)에 따라 자비부담금은 0원부터 최대 약 40만 원 수준입니다. 실습 교재 및 전문 장비 일체가 무상 제공됩니다.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Privacy Policy Modal -->
-    <div id="privacy-modal" class="fixed inset-0 z-[100] hidden">
-        <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onclick="closePrivacyModal()"></div>
-        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-2xl bg-slate-900 rounded-3xl shadow-2xl flex flex-col max-h-[80vh]">
-            <div class="p-6 border-b border-slate-800 flex justify-between items-center shrink-0">
-                <h3 class="text-xl font-bold text-white">개인정보 취급방침</h3>
-                <button onclick="closePrivacyModal()" class="text-slate-500 hover:text-slate-300 text-2xl transition-colors">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
+    <!-- 12. BOTTOM CTA (전화문의 삭제 & 가로로 길게 확장된 지원신청 버튼) -->
+    <section class="py-20 bg-gradient-to-b from-slate-900 to-slate-950 border-t border-slate-800 text-center px-4">
+        <div class="max-w-2xl mx-auto" data-aos="fade-up">
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-blue-600 to-cyan-400 text-white flex items-center justify-center mx-auto mb-6 shadow-xl shadow-cyan-500/20">
+                <i class="fa-solid fa-shield-halved text-2xl"></i>
             </div>
-            <div class="p-6 overflow-y-auto text-sm text-slate-300 leading-relaxed whitespace-pre-wrap">한국직업능력교육원(이하 ‘교육원’이라 한다)은(는) 개인정보보호법에 따라 이용자의 개인정보를 보호하고 이용자의 고충을 원활하게 처리할 수 있도록 다음과 같은 개인정보처리방침을 두고 있습니다.
-
-■ 개인정보의 수집 및 이용목적, 수집하는 개인정보의 항목 및 수집방법
-교육원은 다음의 목적을 위하여 개인정보를 처리합니다. 처리하고 있는 개인정보는 다음의 목적 이외의 용도로는 이용되지 않으며, 이용 목적이 변경될 시에는 사전동의를 구할 예정입니다.
-1. 홈페이지 회원 가입 및 관리
-회원 가입의사 확인, 회원제 서비스 제공에 따른 본인 식별․인증, 회원자격 유지․관리, 제한적 본인확인제 시행에 따른 본인확인, 서비스 부정이용 방지, 만 14세 미만 아동의 개인정보 처리시 법정대리인의 동의여부 확인, 각종 고지․통지, 고충처리 등을 목적으로 개인정보를 처리합니다.
-2. 마케팅 및 광고에 활용 신규 서비스 개발 및 특화, 이벤트 등 광고성 정보 전달, 접속 빈도 파악 또는 회원의 서비스 이용에 대한 통계
-3. 기타 교육 서비스 제공, 가입 및 가입 횟수 제한, 추후 법정 대리인 본인확인, 분쟁 조정을 위한 기록 보존, 상담문의 빈도파악
-
-교육원은 위에 명시한 목적을 위해 다음과 같은 개인정보를 수집하고 있습니다.
-
-1. 수집항목: 이름, 성별, 생년월일. 연락처
-2. 수집방법: 홈페이지
-3. 서비스 이용과정이나 사업 처리 과정에서 서비스 이용기록, 접속 로그, 쿠키, 접속 IP정보, 기기정보, 이용정지 기록과 같은 정보들이 생성되어 수집 가능
-
-■ 개인정보의 처리 및 보유기간
-1. 교육원은 법령에 따른 개인정보 보유․이용기간 또는 이용자로부터 개인정보를 수집 시에 동의받은 개인정보 보유․이용기간 내에서 개인정보를 처리․보유합니다.
-2. 교육원은 회원의 탈퇴에도 불구하고 관련 법령에서 의무보유기간에 대해 별도로 정한 경우에는 해당 기간 종료 시까지 개인정보를 보유합니다.
-3. 각각의 개인정보 처리 및 보유 기간은 다음과 같습니다.
-1) 홈페이지 회원 가입 및 관리 : 사업자·단체 홈페이지 탈퇴시까지
-다만, 다음의 사유에 해당하는 경우에는 해당 사유 종료시까지
-a. 관계 법령 위반에 따른 수사․조사 등이 진행중인 경우에는 해당 수사․조사 종료 시까지
-b. 홈페이지 이용에 따른 채권․채무관계 잔존 시에는 해당 채권․채무관계 정산 시까지
-2) 교육신청 및 상담 : 보존할 필요가 있다고 판단되는 경우 회사는 내부방침에 의하여 일정기간 동안 정보를 보관함
-- 보존기간 : 5년
-3) 재화 또는 서비스 제공 : 재화․서비스 공급완료 및 요금결제․정산 완료시까지
-다만, 다음의 사유에 해당하는 경우에는 해당 기간 종료시까지
-a. 「전자상거래 등에서의 소비자 보호에 관한 법률」에 따른 표시․광고, 계약내용 및 이행 등 거래에 관한 기록
-- 표시․광고에 관한 기록 : 6월
-- 계약 또는 청약철회, 대금결제, 재화 등의 공급기록 : 5년
-- 소비자 불만 또는 분쟁처리에 관한 기록 : 3년
-
-■ 이용자의 권리․의무 및 행사방법
-1. 이용자는 교육원에 대해 언제든지 다음 각 호의 개인정보 보호 관련 권리를 행사할 수 있습니다.
-1) 개인정보 열람요구
-2) 오류 등이 있을 경우 정정 요구
-3) 삭제요구
-4) 처리정지 요구
-2. 제1항에 따른 권리 행사는 교육원에 대해 서면, 전화, 전자우편 등을 통하여 하실 수 있으며 교육원은 이에 대해 지체없이 조치하겠습니다.
-3. 이용자가 개인정보의 오류 등에 대한 정정 또는 삭제를 요구한 경우에는 교육원은 정정 또는 삭제를 완료할 때까지 당해 개인정보를 이용하거나 제공하지 않습니다.
-4. 제1항에 따른 권리 행사는 이용자의 법정대리인이나 위임을 받은 자 등 대리인을 통하여 하실 수 있습니다. 이 경우 개인정보 보호법 시행규칙 별지 제11호 서식에 따른 위임장을 제출하셔야 합니다.
-5. 이용자는 개인정보보호법 등 관계법령을 위반하여 교육원이 처리하고 있는 이용자 본인이나 타인의 개인정보 및 사생활을 침해하여서는 안됩니다.
-6. 개인정보 열람 및 처리정지 요구는 개인정보보호법 제35조 제5항, 제37조 제2항에 의하여 정보주체의 권리가 제한 될 수 있습니다.
-7. 개인정보의 정정 및 삭제 요구는 다른 법령에서 그 개인정보가 수집 대상으로 명시되어 있는 경우에는 그 삭제를 요구할 수 없습니다.
-8. 교육원은 정보주체 권리에 따른 열람의 요구, 정정·삭제의 요구, 처리정지의 요구 시 열람 등 요구를 한 자가 본인이거나 정당한 대리인인지를 확인합니다.
-
-■ 처리하는 개인정보 항목
-교육원은 회원가입, 회원정보수정, 수강신청, 간편문의, 온라인상담, 국비지원 조회 등을 위해 아래와 같은 개인정보를 수집하고 있습니다.
-1. 홈페이지 회원 가입 및 관리
-- 필수항목 : 이름, 생년월일, 아이디, 비밀번호, 주소, 휴대폰번호, 성별, 이메일
-- 선택항목 : 전화번호
-2. 수강신청
-- 필수항목 : 교육과정, 이름, 생년월일, 성별, 휴대폰번호
-
-3. 간편문의
-- 필수항목 : 이름, 휴대폰번호
-4. 온라인상담
-- 필수항목 : 이름, 휴대폰번호
-5. 국비지원 조회
-- 필수항목 : 이름, 휴대폰번호
-- 선택항목 : 생년월일, 구직상태, 사업자등록증보유 여부
-6. 인터넷 서비스 이용과정에서 아래 개인정보 항목이 자동으로 생성되어 수집될 수 있습니다.
-- IP주소, 쿠키, MAC주소, 서비스 이용기록, 방문기록, 불량 이용기록 등
-
-■ 개인정보의 파기
-1. 교육원은 개인정보 보유기간의 경과, 처리목적 달성 등 개인정보가 불필요하게 되었을 때에는 지체없이 해당 개인정보를 파기합니다.
-2. 이용자로부터 동의받은 개인정보 보유기간이 경과하거나 처리목적이 달성되었음에도 불구하고 다른 법령에 따라 개인정보를 계속 보존하여야 하는 경우에는, 해당 개인정보를 별도의 데이터베이스(DB)로 옮기거나 보관장소를 달리하여 보존합니다.
-3. 개인정보 파기의 절차 및 방법은 다음과 같습니다.
-1) 파기절차
-교육원은 파기 사유가 발생한 개인정보를 선정하고, 교육원의 개인정보 보호책임자의 승인을 받아 개인정보를 파기합니다.
-2) 파기방법
-교육원은 전자적 파일 형태로 기록․저장된 개인정보는 기록을 재생할 수 없도록 로우레밸포멧(Low Level Format) 등의 방법을 이용하여 파기하며, 종이 문서에 기록․저장된 개인정보는 분쇄기로 분쇄하거나 소각하여 파기합니다.
-
-■ 개인정보의 안전성 확보조치
-교육원은 개인정보의 안전성 확보를 위해 다음과 같은 조치를 취하고 있습니다.
-1. 관리적 조치 : 개인정보관련 접근 직원의 최소화, 정기적 직원 교육 등
-2. 기술적 조치 : 개인정보처리시스템 등의 접근권한 관리, 고유식별정보 등의 암호화, 보안프로그램 설치
-
-■ 개인정보 자동 수집 장치의 설치∙운영 및 거부에 관한 사항
-1. 회사는 이용자에게 개별적인 맞춤서비스를 제공하기 위해 이용정보를 저장하고 수시로 불러오는 ‘쿠키(cookie)’를 사용합니다.
-2. 쿠키는 웹사이트를 운영하는데 이용되는 서버(http)가 이용자의 컴퓨터 브라우저에게 보내는 소량의 정보이며 이용자들의 PC 컴퓨터내의 하드디스크에 저장되기도 합니다.
-1) 쿠키의 사용목적: 이용자가 방문한 각 서비스와 웹 사이트들에 대한 방문 및 이용형태, 인기 검색어, 보안접속 여부, 등을 파악하여 이용자에게 최적화된 정보 제공을 위해 사용됩니다.
-2) 쿠키의 설치∙운영 및 거부 : 웹브라우저 상단의 도구>인터넷 옵션>개인정보 메뉴의 옵션 설정을 통해 쿠키 저장을 거부 할 수 있습니다.
-3) 쿠키 저장을 거부할 경우 맞춤형 서비스 이용에 어려움이 발생할 수 있습니다.
-
-■ 개인정보 보호책임자
-1. 교육원은 개인정보 처리에 관한 업무를 총괄해서 책임지고, 개인정보 처리와 관련한 이용자의 불만처리 및 피해구제 등을 위하여 아래와 같이 개인정보 보호책임자를 지정하고 있습니다.
-∙ 이 름 : 홍세민
-∙ 소 속 : 한국직업능력교육원
-∙ 연락처 : 070-4903-5732
-∙ E-mail : ktechedu@naver.com
-2. 이용자께서는 교육원의 서비스(또는 사업)을 이용하시면서 발생한 모든 개인정보 보호 관련 문의, 불만처리, 피해구제 등에 관한 사항을 개인정보 보호책임자 및 담당부서로 문의하실 수 있습니다. 교육원은 이용자의 문의에 대해 지체없이 답변 및 처리해드릴 것입니다.
-
-■ 권익침해 구제방법
-이용자는 기타 개인정보침해에 관한 상담이 필요한 경우에는 한국정보보호진흥원, 대검찰청 인터넷범죄수사센터, 경찰청 사이버테러대응센터 등으로 문의하실 수 있습니다.
-- 개인정보침해신고센터 (privacy.kisa.or.kr / 국번없이 118)
-- 개인정보분쟁조정위원회 (www.kopico.go.kr / 1833-6972)
-- 대검찰청 사이버수사과 (www.spo.go.kr / 국번없이 1301)
-- 경찰청 사이버안전국 (cyberbureau.police.go.kr / 국번없이 182)
-
-■ 고지의 의무
-현재 개인정보 취급 방침에서 내용의 추가, 삭제 및 수정이 있을 시에는 변경사항의 시행일의 7일 전부터 "교육원" 사이트의 공지사항을 통하여 고지 할 것 입니다. 다만, 회원의 권리 또는 의무에 중요한 내용의 변경은 최소 30일전에 고지하겠습니다.
-
-○ 본 방침은 2024년 8월 1일부터 시행됩니다.</div>
-            <div class="p-6 border-t border-slate-800 shrink-0 text-right">
-                <button onclick="closePrivacyModal()" class="bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 px-8 rounded-xl transition-colors">닫기</button>
+            <h2 class="text-2xl md:text-4xl font-black text-white mb-4">
+                지금, AI 보안 솔루션 개발자에 도전하세요
+            </h2>
+            <p class="text-slate-300 text-sm md:text-base mb-8">
+                선착순 25명 마감 예정입니다. 아래 버튼을 눌러 온라인으로 1분 만에 간편하게 접수하세요!
+            </p>
+            <div class="max-w-xl mx-auto">
+                <a href="https://naver.me/GyYmEEvT" target="_blank" rel="noopener noreferrer"
+                   class="w-full flex items-center justify-center gap-2.5 px-8 py-4 md:py-5 rounded-2xl bg-gradient-to-r from-blue-600 via-cyan-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white font-black text-base md:text-lg shadow-2xl shadow-cyan-500/35 hover:shadow-cyan-400/50 hover:scale-[1.02] active:scale-[0.98] transition-all">
+                    <span>간편 상담 & 지원신청</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square text-base"></i>
+                </a>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Footer -->
-    <footer class="bg-slate-950 py-12 text-slate-500 text-sm">
-        <div class="max-w-5xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-center md:text-left">
-                <p class="font-bold text-slate-300 text-base mb-2">한국직업능력교육원 안산캠퍼스</p>
+    <!-- 13. FOOTER -->
+    <footer class="bg-slate-950 py-10 text-slate-500 text-xs border-t border-slate-800">
+        <div class="max-w-5xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
+            <div>
+                <p class="font-bold text-slate-300 text-sm mb-1">한국직업능력교육원 안산캠퍼스</p>
                 <p>경기 안산시 단원구 예술대학로 17 안산중앙노블레스 704호</p>
-                <p>홈페이지담당자 : 김서균</p>
+                <p class="mt-0.5">홈페이지 운영/담당자: 김서균 | 상담문의: 1661-8126</p>
             </div>
             <div class="text-center md:text-right">
-                <p class="text-xl font-bold text-white">☎️ 상담문의 : 1661-8126</p>
+                <a href="https://naver.me/GyYmEEvT" target="_blank" rel="noopener noreferrer" class="text-cyan-400 hover:underline font-semibold">
+                    온라인 지원신청 바로가기 <i class="fa-solid fa-arrow-up-right-from-square text-[10px] ml-1"></i>
+                </a>
             </div>
         </div>
     </footer>
 
-    <!-- Floating Action Button -->
-    <button 
-        onclick="document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });"
-        class="fixed bottom-6 right-6 w-16 h-16 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-all z-50 animate-bounce"
-        aria-label="상담 문의"
-    >
-        <i class="fa-solid fa-comment-dots text-3xl"></i>
-    </button>
+    <!-- 14. FLOATING ACTION BUTTON (오른쪽 아래 지원하기 둥둥 떠다니는 버튼) -->
+    <div class="fixed bottom-6 right-6 z-50 animate-float">
+        <a href="https://naver.me/GyYmEEvT" target="_blank" rel="noopener noreferrer"
+           class="group relative flex items-center gap-2.5 px-6 py-3.5 md:py-4 rounded-full bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-400 hover:from-blue-500 hover:to-cyan-400 text-white font-black text-sm md:text-base shadow-2xl shadow-cyan-500/50 hover:shadow-cyan-400/70 border border-white/20 transition-all hover:scale-105 active:scale-95"
+           title="과정 지원신청하기 (새 창)">
+            <span class="relative flex h-3 w-3">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+            </span>
+            <span>지원하기</span>
+            <i class="fa-solid fa-arrow-up-right-from-square text-xs text-white/90"></i>
+        </a>
+    </div>
 
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        // Initialize AOS
+        // 스크롤 올리고 내릴 때마다 애니메이션이 계속해서 반복 실행되도록 once: false, mirror: true 설정
         AOS.init({
             once: false,
-            offset: 50,
+            mirror: true,
+            offset: 60,
             duration: 800,
             easing: 'ease-out-cubic',
         });
 
-        // Custom animation for progress bars
-        
-
-        // Initialize Swiper
         var swiper = new Swiper(".mySwiper", {
             spaceBetween: 30,
             centeredSlides: true,
@@ -868,22 +790,51 @@ a. 「전자상거래 등에서의 소비자 보호에 관한 법률」에 따�
             },
             loop: true
         });
-        
-        // Number counter animation
+
+        function toggleAccordion(idx) {
+            const content = document.getElementById('content-' + idx);
+            const icon = document.getElementById('icon-' + idx);
+            const isOpen = content.classList.contains('open');
+
+            document.querySelectorAll('[id^="content-"]').forEach(el => el.classList.remove('open'));
+            document.querySelectorAll('[id^="icon-"]').forEach(el => el.classList.remove('open'));
+
+            if (!isOpen) {
+                content.classList.add('open');
+                icon.classList.add('open');
+            }
+        }
+
+        function toggleFaq(idx) {
+            const content = document.getElementById('faq-content-' + idx);
+            const icon = document.getElementById('faq-icon-' + idx);
+            const isOpen = content.classList.contains('open');
+
+            document.querySelectorAll('[id^="faq-content-"]').forEach(el => el.classList.remove('open'));
+            document.querySelectorAll('[id^="faq-icon-"]').forEach(el => el.classList.remove('open'));
+
+            if (!isOpen) {
+                content.classList.add('open');
+                icon.classList.add('open');
+            }
+        }
+
+        // 스크롤 올리고 내릴 때마다 그래프 및 숫자 카운트업이 다시 애니메이션되도록 설정
         const counterObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    
-                        const progressBars = entry.target.querySelectorAll('.progress-bar');
-                        progressBars.forEach(bar => {
-                            setTimeout(() => {
-                                bar.style.width = bar.getAttribute('data-width');
-                            }, 100);
-                        });
-const counters = entry.target.querySelectorAll('.count-up');
+                    const progressBars = entry.target.querySelectorAll('.progress-bar');
+                    progressBars.forEach(bar => {
+                        bar.style.width = '0%';
+                        setTimeout(() => {
+                            bar.style.width = bar.getAttribute('data-width');
+                        }, 50);
+                    });
+
+                    const counters = entry.target.querySelectorAll('.count-up');
                     counters.forEach(counter => {
                         const target = +counter.getAttribute('data-target');
-                        const duration = 1500;
+                        const duration = 1200;
                         const increment = target / (duration / 16);
                         let current = 0;
                         
@@ -898,43 +849,22 @@ const counters = entry.target.querySelectorAll('.count-up');
                         };
                         updateCounter();
                     });
-                    counterObserver.unobserve(entry.target);
+                } else {
+                    const progressBars = entry.target.querySelectorAll('.progress-bar');
+                    progressBars.forEach(bar => {
+                        bar.style.width = '0%';
+                    });
+                    const counters = entry.target.querySelectorAll('.count-up');
+                    counters.forEach(counter => {
+                        counter.innerText = '0%';
+                    });
                 }
             });
-        }, { threshold: 0.5 });
+        }, { threshold: 0.3 });
 
         document.querySelectorAll('.count-up-container').forEach(container => {
             counterObserver.observe(container);
         });
-
-        // Form Submission (Optimistic UI)
-        function submitForm(event) {
-            event.preventDefault();
-            const form = event.target;
-            const formData = new FormData(form);
-            
-            // Optimistic UI update
-            document.getElementById('contact-form').style.display = 'none';
-            document.getElementById('success-message').classList.remove('hidden');
-
-            // Send in background
-            fetch(form.action, {
-                method: form.method,
-                body: formData,
-                keepalive: true
-            }).catch(console.error);
-        }
-
-        // Privacy Modal Functions
-        function openPrivacyModal() {
-            document.getElementById('privacy-modal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closePrivacyModal() {
-            document.getElementById('privacy-modal').classList.add('hidden');
-            document.body.style.overflow = '';
-        }
     </script>
 </body>
 </html>
